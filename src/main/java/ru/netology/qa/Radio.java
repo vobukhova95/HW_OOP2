@@ -1,63 +1,100 @@
 package ru.netology.qa;
 
 public class Radio {
-    private int currentRadioStation;
-    private int currentVolume;
+    private int countRadioStation = 10;
+    private int minCountRadioStation = 2;
+    private int minRadioStation = 0;
+    private int maxRadioStation = countRadioStation - 1;
+    private int currentRadioStation = minRadioStation;
+
+    private int minVolume = 0;
+    private int maxVolume = 100;
+    private int currentVolume = 50;
+
+
+    public Radio(int countRadioStation) {
+        if (countRadioStation >= minCountRadioStation) {
+            this.countRadioStation = countRadioStation;
+            maxRadioStation = countRadioStation - 1;
+        }
+    }
+
+    public Radio() {
+    }
+
+    public int getCountRadioStation() {
+        return countRadioStation;
+    }
+
+    public int getMinRadioStation() {
+        return minRadioStation;
+    }
+
+    public int getMaxRadioStation() {
+        return maxRadioStation;
+    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
     public void setCurrentRadioStation(int newCurrentRadioStation) {
-        if (newCurrentRadioStation > 9) {
+        if (newCurrentRadioStation < minRadioStation) {
             return;
         }
-        if (newCurrentRadioStation < 0) {
+        if (newCurrentRadioStation > maxRadioStation) {
             return;
         }
         currentRadioStation = newCurrentRadioStation;
     }
 
     public void next() {
-        if (currentRadioStation == 9) {
-            currentRadioStation = 0;
+        if (currentRadioStation == maxRadioStation) {
+            currentRadioStation = minRadioStation;
             return;
         }
         currentRadioStation++;
     }
 
     public void prev() {
-        if (currentRadioStation == 0) {
-            currentRadioStation = 9;
+        if (currentRadioStation == minRadioStation) {
+            currentRadioStation = maxRadioStation;
             return;
         }
         currentRadioStation--;
     }
 
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
 
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume > 100) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume == 100) {
+        if (currentVolume == maxVolume) {
             return;
         }
         currentVolume++;
     }
 
     public void decreaseVolume() {
-        if (currentVolume == 0) {
+        if (currentVolume == minVolume) {
             return;
         }
         currentVolume--;
